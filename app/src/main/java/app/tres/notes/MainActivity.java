@@ -437,7 +437,7 @@ public final class MainActivity extends Activity {
                         if (widgets.isRequestPinAppWidgetSupported()) widgets.requestPinAppWidget(new ComponentName(this, PriorityWidget.class), null, null);
                         else new AlertDialog.Builder(this).setMessage("Mantén pulsada la pantalla de inicio, elige Widgets y busca Tres.").setPositiveButton("Entendido", null).show();
                     } else new AlertDialog.Builder(this).setTitle("Tus notas, a mano")
-                            .setMessage("Las notas se guardan en este teléfono. Las prioridades pendientes se conservan al cambiar de día. Las completadas se eliminan después de 10 días, al abrir la app o modificar notas. Las tareas repetidas crean su siguiente fecha al completarse. No se envían notificaciones.\n\nEl dictado depende del servicio de voz de Android y puede usar internet. Tres no almacena audio.\n\nAl desinstalar la app o borrar sus datos se eliminan las notas. Versión 1.0.0.")
+                            .setMessage("Las notas se guardan en este teléfono. Las prioridades pendientes se conservan al cambiar de día. Las completadas se eliminan después de 10 días, al abrir la app o modificar notas. Las tareas repetidas crean su siguiente fecha al completarse. No se envían notificaciones.\n\nEl dictado depende del servicio de voz de Android y puede usar internet. Tres no almacena audio.\n\nAl desinstalar la app o borrar sus datos se eliminan las notas. Versión " + versionName() + ".")
                             .setPositiveButton("Entendido", null).show();
                 }).show();
     }
@@ -478,6 +478,11 @@ public final class MainActivity extends Activity {
             status.setText(message);
             toast(message);
         });
+    }
+
+    private String versionName() {
+        try { return getPackageManager().getPackageInfo(getPackageName(), 0).versionName; }
+        catch (android.content.pm.PackageManager.NameNotFoundException error) { return "?"; }
     }
 
     private long now() { return System.currentTimeMillis(); }

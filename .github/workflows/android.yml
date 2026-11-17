@@ -20,8 +20,8 @@ jobs:
       - run: chmod +x gradlew scripts/test-core.sh
       - name: Pruebas de dominio (JVM)
         run: ./scripts/test-core.sh
-      - name: Compilar APK debug y lint
-        run: ./gradlew assembleDebug lintDebug --stacktrace
+      - name: Compilar APK debug, lint y release (sin firmar)
+        run: ./gradlew assembleDebug lintDebug assembleRelease --stacktrace
       - name: Subir APK
         uses: actions/upload-artifact@v4
         with:
