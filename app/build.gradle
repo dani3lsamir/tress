@@ -1,0 +1,18 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'app.tres.notes'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'app.tres.notes'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0.0'
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+    }
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    buildTypes { release { minifyEnabled true; shrinkResources true; proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' } }
+    lint { abortOnError true }
+}

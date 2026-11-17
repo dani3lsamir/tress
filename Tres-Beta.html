@@ -1,0 +1,396 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tres - Beta</title><style>body{margin:0;background:#000}button{cursor:pointer}#tres-beta .schedule{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+#tres-beta .schedule label{font-size:12px;color:var(--sub);min-width:0}
+#tres-beta .schedule input,#tres-beta .schedule select{display:block;width:100%;min-width:0;margin-top:6px;padding:10px 6px;min-height:44px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:9px;font:inherit;color-scheme:dark}
+#tres-beta .retention{font-size:12px;color:var(--sub);line-height:1.5}
+@media(max-width:350px){#tres-beta .schedule{grid-template-columns:1fr}}
+</style></head><body><div id="tres-beta" class="viz-dotted-background">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+#tres-beta{padding:24px 12px;background:transparent;font-family:'DM Sans',sans-serif;color:#f4f2ed;box-sizing:border-box}
+#tres-beta *{box-sizing:border-box}
+#tres-beta .app{--bg:#000;--panel:#000;--ink:#f4f2ed;--sub:#b9bbc2;--line:#484b53;--button:#f4f2ed;--button-ink:#23252a;max-width:440px;margin:0 auto;background:var(--bg);color:var(--ink);border-radius:32px;padding:28px 24px 22px;box-shadow:0 18px 60px #00000024;overflow-wrap:anywhere}
+#tres-beta button,#tres-beta select,#tres-beta textarea{font:inherit}
+#tres-beta button{cursor:pointer;-webkit-tap-highlight-color:transparent;color:inherit}
+#tres-beta button:focus-visible,#tres-beta select:focus-visible,#tres-beta textarea:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+#tres-beta [hidden]{display:none!important}
+#tres-beta .topline{display:flex;align-items:center;justify-content:flex-end;gap:12px}
+#tres-beta .icon-button{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px;background:transparent;border:1px solid var(--line);border-radius:50%;flex-shrink:0}
+#tres-beta .icon-button:hover{background:var(--panel)}
+#tres-beta .brand{font-family:'Manrope','DM Sans',sans-serif;font-size:72px;line-height:1;letter-spacing:-6px;font-weight:600;margin:21px 0 11px}
+#tres-beta .tagline{margin:0;color:var(--sub);font-size:15px;line-height:1.5}
+#tres-beta .capture{display:flex;gap:10px;margin:25px 0 0}
+#tres-beta .voice{flex:1;min-height:54px;border:0;border-radius:17px;background:var(--button);color:var(--button-ink);display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:600;padding:12px}
+#tres-beta .voice:hover{opacity:.9}
+#tres-beta .write{min-width:54px;min-height:54px;background:var(--panel);border:1px solid var(--line);border-radius:17px;font-size:26px;line-height:1}
+#tres-beta .capture-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:9px 1px 28px}
+#tres-beta .voice-hint{color:var(--sub);font-size:11px}
+#tres-beta .language{display:flex;gap:1px}
+#tres-beta .language button{border:0;background:transparent;font-size:12px;color:var(--sub);min-width:36px;min-height:36px;border-radius:10px;padding:5px}
+#tres-beta .language button[aria-pressed="true"]{background:var(--panel);color:var(--ink);font-weight:700}
+#tres-beta .section-line{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 13px}
+#tres-beta .section-line h2{font-size:17px;font-weight:600;letter-spacing:-.3px;margin:0}
+#tres-beta .slots{display:flex;gap:6px;align-items:center;color:var(--sub);font-size:12px}
+#tres-beta .dot{width:7px;height:7px;background:var(--line);border-radius:50%;display:inline-block}
+#tres-beta .dot.on{background:var(--ink)}
+#tres-beta .priority{display:flex;gap:12px;padding:17px 13px 14px 15px;border:1px solid var(--line);border-radius:18px;background:var(--panel);margin:0 0 10px;align-items:flex-start}
+#tres-beta .complete{border:1.5px solid var(--sub);background:transparent;width:24px;height:24px;min-width:24px;border-radius:50%;margin:1px 0;position:relative}
+#tres-beta .complete:before{content:'';position:absolute;inset:-11px}
+#tres-beta .complete:hover{background:var(--ink);box-shadow:inset 0 0 0 5px var(--panel)}
+#tres-beta .note-content{flex:1;min-width:0}
+#tres-beta .note-text{font-size:15px;line-height:1.5;text-align:left;background:none;border:0;padding:0;width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
+#tres-beta .note-detail{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;color:var(--sub);font-size:11px}
+#tres-beta .small-action{background:none;border:0;color:var(--sub);font-size:12px;padding:8px 0 8px 10px;min-height:36px;white-space:nowrap}
+#tres-beta .small-action:hover{color:var(--ink)}
+#tres-beta .empty-slot{border:1px dashed var(--line);border-radius:18px;min-height:68px;display:flex;align-items:center;gap:12px;padding:15px;color:var(--sub);font-size:13px;background:transparent;width:100%;text-align:left;margin-bottom:10px}
+#tres-beta .empty-slot span:first-child{font-size:22px;width:24px;text-align:center}
+#tres-beta .tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:27px 0 4px}
+#tres-beta .tab{color:var(--sub);font-size:14px;padding:0 0 13px;min-height:44px;border:0;border-bottom:2px solid transparent;background:transparent}
+#tres-beta .tab[aria-selected="true"]{border-bottom-color:var(--ink);color:var(--ink);font-weight:600}
+#tres-beta .tab-count{font-size:11px;margin-left:5px;color:var(--sub)}
+#tres-beta .other-note{display:flex;align-items:flex-start;gap:12px;padding:19px 2px 13px;border-bottom:1px solid var(--line)}
+#tres-beta .other-note .note-text{font-size:14px}
+#tres-beta .other-note.done .note-text{color:var(--sub)}
+#tres-beta .done-mark{width:24px;min-width:24px;color:var(--sub);font-size:18px}
+#tres-beta .empty-list{color:var(--sub);font-size:14px;line-height:1.6;margin:24px 0}
+#tres-beta .footer{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:22px;color:var(--sub);font-size:11px}
+#tres-beta .footer button{border:0;background:none;color:var(--sub);font-size:11px;min-height:36px;text-decoration:underline;text-underline-offset:3px;padding:4px 0}
+#tres-beta .sample-note{font-size:11px;line-height:1.5;color:var(--sub);margin:15px 0 0}
+#tres-beta .settings{margin:18px 0;padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+#tres-beta .settings label{display:block;font-size:13px;margin-bottom:10px}
+#tres-beta .settings p{font-size:12px;color:var(--sub);line-height:1.6;margin:15px 0 0}
+#tres-beta .composer{margin:18px 0 25px;padding:17px;border:1px solid var(--line);border-radius:20px;background:var(--panel)}
+#tres-beta .composer-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px;font-size:14px}
+#tres-beta textarea{resize:vertical;min-height:130px;width:100%;border:0;border-radius:10px;background:var(--bg);color:var(--ink);padding:13px;font-size:16px;line-height:1.55}
+#tres-beta textarea::placeholder{color:var(--sub)}
+#tres-beta .editor-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+#tres-beta .editor-actions button{min-height:44px;border:1px solid var(--line);background:transparent;border-radius:12px;padding:10px 16px;font-size:13px}
+#tres-beta .editor-actions .save{background:var(--button);color:var(--button-ink);border-color:var(--button)}
+#tres-beta button:disabled{opacity:.5;cursor:default}
+#tres-beta .notice{margin:16px 0 6px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;font-size:13px;line-height:1.55;background:var(--panel)}
+#tres-beta .notice:empty{display:none}
+#tres-beta .recording{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:13px;margin:0 0 12px}
+#tres-beta .recording-dot{height:8px;width:8px;background:var(--ink);border-radius:50%}
+#tres-beta .widget-preview{margin-top:20px;border:1px solid var(--line);border-radius:20px;background:var(--panel);padding:17px}
+#tres-beta .widget-preview h3{font-size:15px;margin:0 0 14px;font-weight:500}
+#tres-beta .widget-preview p{font-size:13px;line-height:1.5;margin:10px 0;white-space:pre-wrap}
+#tres-beta .widget-preview small{display:block;font-size:11px;color:var(--sub);margin-top:14px;line-height:1.5}
+@media(max-width:380px){#tres-beta{padding:8px 0}#tres-beta .app{padding:21px 17px 18px;border-radius:22px}#tres-beta .brand{font-size:64px}#tres-beta .capture{gap:8px}#tres-beta .tabs{gap:17px}}
+@media(prefers-reduced-motion:no-preference){#tres-beta button{transition:background .15s,opacity .15s}#tres-beta .recording-dot{animation:tres-pulse 1.2s infinite alternate}@keyframes tres-pulse{to{opacity:.25}}}
+</style>
+<main class="app" data-theme="black" aria-label="Tres, beta de notas y prioridades">
+  <header>
+    <div class="topline"><button class="icon-button" data-settings aria-label="Abrir ajustes" aria-expanded="false"><span aria-hidden="true">⚙</span></button></div>
+    <h1 class="brand">tres.</h1>
+    <p class="tagline">Menos en tu cabeza. Más a mano.</p>
+  </header>
+  <section class="settings" data-settings-panel hidden aria-label="Ajustes">
+    <label>Idioma del dictado</label>
+    <div class="language" aria-label="Idioma del dictado"><button data-language="es-BO" aria-pressed="true">Español</button><button data-language="en-US" aria-pressed="false">English</button></div>
+    <p>El navegador utiliza un idioma por dictado. Puedes cambiarlo aquí. Mezclar español e inglés no está garantizado. El reconocimiento de voz depende del navegador y puede procesar audio por internet. Esta beta guarda texto en este navegador cuando permite almacenamiento.</p>
+  </section>
+  <div class="capture"><button class="voice" data-voice><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/></svg><span data-voice-label>Dictar una nota</span></button><button class="write" data-new aria-label="Escribir una nota">+</button></div>
+<div style="height:24px"></div>
+  <div class="notice" data-status role="status" aria-live="polite"></div>
+  <section class="composer" data-composer hidden aria-label="Editor de nota">
+    <div class="composer-title"><strong data-editor-title>Nueva nota</strong><span data-length>0 / 20.000</span></div>
+    <div class="recording" data-recording hidden><span class="recording-dot"></span><span>Escuchando… habla con naturalidad.</span></div>
+    <textarea data-input aria-label="Texto de la nota" placeholder="¿Qué tienes pendiente?" maxlength="20000"></textarea>
+    <div class="schedule"><label>Fecha<input type="date" data-due></label><label>Repetir<select data-repeat><option value="none">No repetir</option><option value="daily">Cada día</option><option value="weekly">Cada semana</option><option value="monthly">Cada mes</option></select></label></div>
+    <p class="retention">Al completar una tarea repetida se crea la siguiente fecha. No envía notificaciones.</p>
+    <div class="editor-actions"><button data-cancel>Cerrar</button><button class="save" data-save>Guardar nota</button></div>
+  </section>
+  <section aria-label="Prioridades"><div class="section-line"><h2>Tus tres prioridades</h2><div class="slots" data-slots aria-label="Prioridades activas"></div></div><div data-priorities></div></section>
+  <div class="tabs" role="tablist" aria-label="Tus notas"><button class="tab" role="tab" id="tres-pending-tab" aria-selected="true" aria-controls="tres-note-list" data-tab="pending">Otras notas <span class="tab-count" data-pending-count></span></button><button class="tab" role="tab" id="tres-done-tab" aria-selected="false" aria-controls="tres-note-list" data-tab="done">Completadas <span class="tab-count" data-done-count></span></button></div>
+  <p class="retention">Las completadas se eliminan después de 10 días. La limpieza se realiza al abrir la beta o mientras está abierta.</p>
+  <section id="tres-note-list" role="tabpanel" aria-labelledby="tres-pending-tab" data-notes></section>
+  <div class="footer"><span data-storage>Guardado en este navegador</span><button data-widget aria-expanded="false">Ver widget</button></div>
+  <section class="widget-preview" data-widget-panel hidden aria-label="Vista previa del widget"><h3>tres · Prioridades</h3><div data-widget-notes></div><small>Vista previa. El widget de la pantalla de inicio formará parte de la app Android.</small></section>
+  <p class="sample-note" data-example-notice>Notas de ejemplo para explorar la beta. Puedes editarlas y añadir las tuyas.</p>
+</main>
+<script>
+(() => {
+  const root = document.getElementById('tres-beta');
+  const q = selector => root.querySelector(selector);
+  const app = q('.app');
+  const key = 'tres-beta-v1';
+  const draftKey = 'tres-beta-draft-v1';
+  const maximum = 20000;
+  const day = 86400000;
+  const repeats = {none:'',daily:'Cada día',weekly:'Cada semana',monthly:'Cada mes'};
+  function dateString(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function validDate(s){if(s==='')return true;if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;const d=new Date(s+'T12:00:00');return !isNaN(d)&&dateString(d)===s;}
+  function nextDate(n){
+    const d=new Date(n.due+'T12:00:00');
+    if(n.repeat==='monthly'){const anchor=n.anchorDay||d.getDate();d.setDate(1);d.setMonth(d.getMonth()+1);const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(anchor,last));}
+    else d.setDate(d.getDate()+(n.repeat==='weekly'?7:1));
+    return dateString(d);
+  }
+  function migrate(value){
+    const n=JSON.parse(JSON.stringify(value));
+    n.theme='black';
+    n.scheduleVersion=1;
+    n.notes.forEach(t=>{t.due??='';t.repeat??='none';t.completedAt??=t.done?t.updated:null;});
+    return n;
+  }
+  const now = Date.now();
+  let state = {version:1,theme:'black',language:'es-BO',notes:[
+    {id:'sample-one',text:'Terminar lo que dejé a medias ayer.',created:now-6000,updated:now-6000,done:false,priority:1,sample:true},
+    {id:'sample-two',text:'Salir a caminar media hora.',created:now-5000,updated:now-5000,done:false,priority:2,sample:true},
+    {id:'sample-three',text:'Call to confirm tomorrow’s appointment.',created:now-4000,updated:now-4000,done:false,priority:3,sample:true},
+    {id:'sample-four',text:'Comprar café cuando salga.',created:now-3000,updated:now-3000,done:false,priority:0,sample:true},
+    {id:'sample-five',text:'Anotar esa idea antes de olvidarla.',created:now-2000,updated:now-2000,done:false,priority:0,sample:true}
+  ]};
+  let storageAvailable = true;
+  let persistenceBlocked = false;
+  let tab = 'pending';
+  let editingId = null;
+  let recording = null;
+  let finalSegments = [];
+  let voiceFailed = false;
+  let editingCaptureId = null;
+  let limit = 40;
+
+  function valid(value) {
+    if(!value || value.version!==1 || !Array.isArray(value.notes) || !['black','white','charcoal'].includes(value.theme) || !['es-BO','en-US'].includes(value.language)) return false;
+    const ids = new Set(), slots = new Set();
+    return value.notes.every(n=>{
+      if(typeof n.id!=='string'||!n.id||ids.has(n.id)||typeof n.text!=='string'||!n.text.trim()||n.text.length>maximum||typeof n.done!=='boolean'||!Number.isInteger(n.priority)||n.priority<0||n.priority>3||(n.done&&n.priority>0)||!Number.isFinite(n.updated)||!Number.isFinite(n.created))return false;
+      if(n.due!==undefined&&!validDate(n.due))return false;
+      if(n.repeat!==undefined&&(!Object.hasOwn(repeats,n.repeat)||(n.repeat!=='none'&&!n.due)))return false;
+      if(n.completedAt!==undefined&&n.completedAt!==null&&!Number.isFinite(n.completedAt))return false;
+      if(n.anchorDay!==undefined&&n.anchorDay!==null&&(!Number.isInteger(n.anchorDay)||n.anchorDay<0||n.anchorDay>31))return false;
+      if(n.nextId!==undefined&&n.nextId!==null&&typeof n.nextId!=='string')return false;
+      if(n.priority>0&&slots.has(n.priority))return false;
+      ids.add(n.id); if(n.priority)slots.add(n.priority); return true;
+    });
+  }
+  try {
+    const raw = localStorage.getItem(key);
+    if(raw!==null) {
+      const saved = JSON.parse(raw);
+      if(!valid(saved))throw new Error('invalid');
+      state = migrate(saved);
+    }
+  } catch(error) {
+    storageAvailable = false;
+    if(error.name!=='SecurityError')persistenceBlocked = true;
+  }
+
+  function message(text) { q('[data-status]').textContent = text; }
+  function uid() { return globalThis.crypto?.randomUUID?.() || Date.now().toString(36)+'-'+Math.random().toString(36).slice(2); }
+  function persist(next) {
+    if(!valid(next)) {message('No se pudo aplicar el cambio. Tus notas se conservan.'); return false;}
+    if(persistenceBlocked){message('Hay datos guardados que no se pudieron leer. Se conservan sin sobrescribir.');return false;}
+    if(storageAvailable) {
+      try {localStorage.setItem(key,JSON.stringify(next));}
+      catch(error) {
+        if(error.name==='SecurityError'){storageAvailable=false;}
+        else {message('El navegador no pudo guardar. Conserva el texto e inténtalo de nuevo.');return false;}
+      }
+    }
+    state=next;
+    render();
+    return true;
+  }
+  function change(action,feedback) {
+    const next=JSON.parse(JSON.stringify(state));
+    if(action(next)===false)return false;
+    if(!persist(next))return false;
+    message(feedback);
+    return true;
+  }
+  function node(tag,cls,text) {const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;}
+  function button(label,cls,action,aria) {const el=node('button',cls,label);el.type='button';if(aria)el.setAttribute('aria-label',aria);el.addEventListener('click',action);return el;}
+  function pin(id) {
+    change(next=>{
+      const n=next.notes.find(n=>n.id===id);if(!n||n.done)return false;
+      if(n.priority){n.priority=0; n.updated=Date.now();return;}
+      const taken=new Set(next.notes.map(n=>n.priority));
+      const slot=[1,2,3].find(s=>!taken.has(s));
+      if(!slot){message('Ya tienes tres prioridades. Quita una para darle lugar a esta.');return false;}
+      n.priority=slot;n.updated=Date.now();
+    },'Prioridades actualizadas.');
+  }
+  function complete(id) {change(next=>{
+    const n=next.notes.find(n=>n.id===id);if(!n||n.done)return false;
+    n.done=true;n.priority=0;n.completedAt=Date.now();n.updated=n.completedAt;
+    if(n.repeat&&n.repeat!=='none'&&!n.nextId){
+      n.nextId=uid();const due=nextDate(n);
+      next.notes.push({...n,id:n.nextId,done:false,completedAt:null,created:Date.now(),updated:Date.now(),due,anchorDay:n.anchorDay||Number(n.due.slice(-2)),sample:false,nextId:null});
+    }
+  },'Completada. Se conservará 10 días. Si se repite, la siguiente fecha está en Otras notas.');}
+  function restore(id) {change(next=>{const n=next.notes.find(n=>n.id===id);if(!n)return false;n.done=false;n.completedAt=null;n.priority=0;n.updated=Date.now();},'Nota restaurada. Si ya se creó su siguiente repetición, también se conserva.');}
+  function cleanup(){
+    if(persistenceBlocked)return;
+    const next=migrate(state);
+    next.notes=next.notes.filter(n=>!n.done||Date.now()-n.completedAt<10*day);
+    if(JSON.stringify(next)!==JSON.stringify(state))persist(next);
+  }
+  function noteCard(note,priority) {
+    const el=node('article',priority?'priority':note.done?'other-note done':'other-note');
+    if(!note.done)el.append(button('','complete',()=>complete(note.id),'Completar: '+note.text));
+    else el.append(node('span','done-mark','✓'));
+    const content=node('div','note-content');
+    content.append(button(note.text,'note-text',()=>openEditor(note.id),'Editar: '+note.text));
+    const detail=node('div','note-detail');
+    const updated=new Date(note.updated),sameDay=dateString(updated)===dateString(new Date());
+    detail.append(node('span','',note.sample?'Ejemplo':new Intl.DateTimeFormat('es',sameDay?{hour:'2-digit',minute:'2-digit'}:{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}).format(updated)));
+    const info=[];
+    if(note.due){const today=dateString(new Date());info.push((!note.done&&note.due<today?'Vencida · ':'')+new Intl.DateTimeFormat('es',{day:'numeric',month:'short',year:'numeric'}).format(new Date(note.due+'T12:00:00')));}
+    if(note.repeat&&note.repeat!=='none')info.push(repeats[note.repeat]);
+    if(note.done){const left=Math.max(0,Math.ceil((note.completedAt+10*day-Date.now())/day));info.push('Se elimina en '+left+(left===1?' día':' días'));}
+    if(info.length)content.append(node('p','retention',info.join(' · ')));
+    detail.append(button(note.done?'Restaurar':priority?'Quitar de tres':'Priorizar','small-action',()=>note.done?restore(note.id):pin(note.id)));
+    content.append(detail);el.append(content);return el;
+  }
+  function render() {
+    app.dataset.theme=state.theme;
+    root.querySelectorAll('[data-language]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.language===state.language)));
+    const priorities=state.notes.filter(n=>n.priority>0).sort((a,b)=>a.priority-b.priority);
+    const slots=q('[data-slots]');slots.replaceChildren();slots.setAttribute('aria-label',priorities.length+' de 3 prioridades activas');
+    for(let i=0;i<3;i++)slots.append(node('span','dot'+(i<priorities.length?' on':'')));
+    const section=q('[data-priorities]');section.replaceChildren();
+    priorities.forEach(n=>section.append(noteCard(n,true)));
+    if(priorities.length<3){const empty=button('','empty-slot',()=>{tab='pending';render();q('[data-notes]').scrollIntoView({block:'nearest',behavior:'auto'});});empty.append(node('span','','+'),node('span','',priorities.length===0?'Elige hasta tres prioridades':'Un lugar para lo que importa'));section.append(empty);}
+    const pending=state.notes.filter(n=>!n.done&&!n.priority);
+    const done=state.notes.filter(n=>n.done);
+    q('[data-pending-count]').textContent=pending.length;
+    q('[data-done-count]').textContent=done.length;
+    root.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===tab)));
+    const target=q('[data-notes]');target.setAttribute('aria-labelledby',tab==='pending'?'tres-pending-tab':'tres-done-tab');target.replaceChildren();
+    const notes=(tab==='pending'?pending:done).sort((a,b)=>b.updated-a.updated);
+    notes.slice(0,limit).forEach(n=>target.append(noteCard(n,false)));
+    if(!notes.length)target.append(node('p','empty-list',tab==='pending'?'Un pendiente menos en tu cabeza. Añade una nota cuando lo necesites.':'Aquí quedará lo que vayas terminando.'));
+    if(notes.length>limit)target.append(button('Mostrar más','small-action',()=>{limit+=40;render();}));
+    q('[data-storage]').textContent=persistenceBlocked?'Almacenamiento por revisar':storageAvailable?'Guardado en este navegador':'Sesión temporal · guarda tu texto';
+    const widget=q('[data-widget-notes]');widget.replaceChildren();
+    priorities.forEach(n=>widget.append(node('p','','○  '+n.text)));
+    if(!priorities.length)widget.append(node('p','','Elige tus prioridades en Tres.'));
+    q('[data-example-notice]').hidden=!state.notes.some(n=>n.sample);
+  }
+  function saveDraft(){
+    try{localStorage.setItem(draftKey,JSON.stringify({id:editingId,capture:editingCaptureId,text:q('[data-input]').value,due:q('[data-due]').value,repeat:q('[data-repeat]').value}));}catch(error){}
+  }
+  function openEditor(id=null) {
+    if(recording){message('Termina el dictado para editar otra nota.');return;}
+    if(!q('[data-input]').value.trim()){
+      try{
+        const draft=JSON.parse(localStorage.getItem(draftKey)||'null');
+        if(draft&&typeof draft.text==='string'&&draft.text.trim()){
+          editingId=typeof draft.id==='string'?draft.id:null;
+          editingCaptureId=typeof draft.capture==='string'?draft.capture:uid();
+          q('[data-input]').value=draft.text;
+          q('[data-due]').value=validDate(draft.due)?draft.due:'';q('[data-repeat]').value=Object.hasOwn(repeats,draft.repeat)?draft.repeat:'none';
+        }
+      }catch(error){}
+    }
+    if(q('[data-input]').value.trim()){
+      q('[data-composer]').hidden=false;
+      q('[data-editor-title]').textContent=editingId?'Editar nota':'Nueva nota';
+      updateLength();q('[data-input]').focus();
+      if(editingId!==id)message('Continúa o guarda tu borrador antes de abrir otra nota.');
+      return;
+    }
+    editingId=id;editingCaptureId=uid();
+    const n=state.notes.find(n=>n.id===id);
+    q('[data-editor-title]').textContent=n?'Editar nota':'Nueva nota';
+    q('[data-input]').value=n?n.text:'';
+    q('[data-due]').value=n?.due||'';q('[data-repeat]').value=n?.repeat||'none';
+    q('[data-composer]').hidden=false;
+    updateLength();q('[data-input]').focus();
+  }
+  function updateLength(){q('[data-length]').textContent=q('[data-input]').value.length.toLocaleString('es')+' / 20.000';}
+  function closeEditor(){
+    q('[data-composer]').hidden=true;q('[data-input]').value='';editingId=null;editingCaptureId=null;
+    q('[data-due]').value='';q('[data-repeat]').value='none';
+    try{localStorage.removeItem(draftKey);}catch(error){}
+  }
+  function saveNote() {
+    const text=q('[data-input]').value.trim();
+    if(!text){message('Escribe o dicta algo antes de guardar.');q('[data-input]').focus();return false;}
+    if(text.length>maximum){message('La nota supera los 20.000 caracteres. Puedes acortarla.');return false;}
+    const due=q('[data-due]').value, repeat=q('[data-repeat]').value;
+    if(!validDate(due)||(repeat!=='none'&&!due)){message('Elige una fecha para la tarea repetida.');q('[data-due]').focus();return false;}
+    const id=editingId,capture=editingCaptureId||uid();
+    const saved=change(next=>{
+      const n=next.notes.find(n=>n.id===(id||capture));
+      if(id&&!n){message('La nota ya no está disponible. Copia el texto para conservarlo.');return false;}
+      if(n){n.text=text;n.updated=Date.now();n.sample=false;if(n.due!==due||n.repeat!==repeat)n.anchorDay=due?Number(due.slice(-2)):null;n.due=due;n.repeat=repeat;}
+      else next.notes.push({id:capture,text,created:Date.now(),updated:Date.now(),done:false,priority:0,sample:false,due,repeat,completedAt:null,anchorDay:due?Number(due.slice(-2)):null});
+    },storageAvailable?'Nota guardada. Puedes marcarla como prioridad.':'Nota añadida para esta sesión. El navegador no permite guardado permanente.');
+    if(saved){closeEditor();tab='pending';render();}return saved;
+  }
+  function voiceState(active){
+    q('[data-recording]').hidden=!active;
+    q('[data-voice-label]').textContent=active?'Terminar dictado':'Dictar una nota';
+    q('[data-save]').disabled=active;q('[data-cancel]').disabled=active;q('[data-input]').readOnly=active;
+    root.querySelectorAll('[data-language]').forEach(b=>b.disabled=active);
+  }
+  function startVoice(){
+    if(recording){recording.stop();return;}
+    const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!Recognition){
+      openEditor();
+      message('El dictado no está disponible en esta vista. Puedes escribir o usar el micrófono de tu teclado.');return;
+    }
+    openEditor();
+    if(q('[data-input]').value.trim()){message('Guarda la nota abierta antes de iniciar un dictado.');return;}
+    try {
+      const recognizer=new Recognition();recording=recognizer;finalSegments=[];voiceFailed=false;
+      recognizer.lang=state.language;recognizer.continuous=false;recognizer.interimResults=true;recognizer.maxAlternatives=1;
+      recognizer.onstart=()=>{voiceState(true);message('El servicio de voz del navegador está escuchando.');};
+      recognizer.onresult=event=>{
+        let interim='';
+        for(let i=event.resultIndex;i<event.results.length;i++){
+          if(event.results[i].isFinal)finalSegments[i]=event.results[i][0].transcript;
+          else interim+=event.results[i][0].transcript;
+        }
+        q('[data-input]').value=finalSegments.filter(Boolean).join(' ')+(interim?' '+interim:'');updateLength();saveDraft();
+      };
+      recognizer.onerror=event=>{
+        voiceFailed=true;
+        const errors={'not-allowed':'El micrófono no tiene permiso en esta vista. Puedes escribir o usar el micrófono del teclado.','service-not-allowed':'Esta vista no permite el servicio de dictado. Puedes usar el micrófono del teclado.','no-speech':'No se detectó voz. Puedes intentarlo otra vez.','audio-capture':'No se pudo acceder al micrófono. Comprueba que esté disponible.','network':'El servicio de dictado no pudo conectarse. El texto recibido sigue en el editor.','language-not-supported':'El servicio no admite este idioma. Prueba el otro idioma o el dictado del teclado.','aborted':'Dictado detenido. Puedes revisar el texto.'};
+        message(errors[event.error]||'No se pudo terminar el dictado. Revisa el texto recibido.');
+      };
+      recognizer.onend=()=>{
+        recording=null;voiceState(false);
+        if(!voiceFailed&&finalSegments.filter(Boolean).length){q('[data-input]').value=finalSegments.filter(Boolean).join(' ');saveNote();}
+        else if(!voiceFailed)message('No se recibió texto. Puedes volver a dictar o escribir.');
+      };
+      voiceState(true);recognizer.start();
+    }catch(error){recording=null;voiceState(false);message('No se pudo iniciar el dictado en esta vista. Puedes usar el micrófono de tu teclado.');}
+  }
+  q('[data-due]').addEventListener('change',saveDraft);
+  q('[data-repeat]').addEventListener('change',saveDraft);
+  q('[data-new]').addEventListener('click',()=>openEditor());
+  q('[data-voice]').addEventListener('click',startVoice);
+  q('[data-save]').addEventListener('click',saveNote);
+  q('[data-input]').addEventListener('input',()=>{updateLength();saveDraft();});
+  q('[data-input]').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'&&!recording){e.preventDefault();saveNote();}});
+  q('[data-cancel]').addEventListener('click',()=>{
+    if(q('[data-input]').value.trim()){saveDraft();q('[data-composer]').hidden=true;message('Borrador conservado. Pulsa + para continuar.');}
+    else closeEditor();
+  });
+  root.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{tab=b.dataset.tab;limit=40;render();}));
+  root.querySelectorAll('[data-language]').forEach(b=>b.addEventListener('click',()=>change(n=>{n.language=b.dataset.language;},b.dataset.language==='es-BO'?'Dictado en español.':'Dictation in English.')));
+  q('[data-settings]').addEventListener('click',()=>{const panel=q('[data-settings-panel]');panel.hidden=!panel.hidden;q('[data-settings]').setAttribute('aria-expanded',String(!panel.hidden));});
+  q('[data-widget]').addEventListener('click',()=>{const panel=q('[data-widget-panel]');panel.hidden=!panel.hidden;q('[data-widget]').setAttribute('aria-expanded',String(!panel.hidden));});
+  window.addEventListener('pagehide',()=>{if(recording)recording.abort();});
+  window.addEventListener('storage',event=>{
+    if(event.key!==key||event.newValue===null||persistenceBlocked)return;
+    try{const saved=JSON.parse(event.newValue);if(valid(saved)){state=migrate(saved);render();}}catch(error){}
+  });
+  state=migrate(state);
+  cleanup();render();
+  setInterval(cleanup,60000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)cleanup();});
+  if(persistenceBlocked)message('No se pudieron leer datos guardados de esta beta. Se conservan sin sobrescribir.');
+  else if(!storageAvailable)message('Esta vista no permite almacenamiento. Puedes probar la app durante esta sesión.');
+  try {
+    const draft=JSON.parse(localStorage.getItem(draftKey)||'null');
+    if(draft&&typeof draft.text==='string'&&draft.text.trim())message('Tienes un borrador. Pulsa + para continuar.');
+  }catch(error){}
+})();
+</script>
+</div>
+</body></html>
